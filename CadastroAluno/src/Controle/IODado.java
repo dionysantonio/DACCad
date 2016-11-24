@@ -6,6 +6,8 @@
 package Controle;
 import java.io.RandomAccessFile;
 import java.io.IOException;
+import Dado.Aluno;
+
 /**
  *
  * @author d119322
@@ -13,7 +15,7 @@ import java.io.IOException;
 public class IODado {
     private RandomAccessFile arquivo;
     
-    IODado(String caminho){
+    public IODado(String caminho){
         try{
         RandomAccessFile file = new RandomAccessFile(caminho, "rw");
         arquivo = file;
@@ -32,9 +34,45 @@ public class IODado {
     }
     
     public void finalizar(){
-        arquivo.close();
+        try{
+          arquivo.close();
+        }catch(IOException e){
+            System.out.println(e.getCause());
+        }
+        
     }
+    
+    public Aluno ler( int pos){
+        
+        Aluno aluno = new Aluno();
+        String aux;
+        String[] dado;
+                
+            aux = lerLinha(pos);
+            dado = aux.split("|");
             
+            aluno.setNome(dado[0]);
+            aluno.setRA(Integer.parseInt(dado[1]));
+            aluno.setIdade(Integer.parseInt(dado[2]));
+            aluno.setCPF(Integer.parseInt(dado[3]));
+            
+        return aluno;
+        
+    }
+    
+    private String lerLinha(int pos){
+        String aux = new String();
+        char n;
+        
+        try{
+            arquivo.seek(pos);
+            for(n = arquivo.readChar();n!='#';)
+                aux = aux + arquivo.readChar();
+        }catch(IOException e){
+            System.out.println(e.getCause());
+        }
+        return aux;
+    }
     
     
 }
