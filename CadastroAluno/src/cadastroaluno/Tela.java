@@ -42,6 +42,11 @@ public class Tela extends javax.swing.JFrame {
         jButtonCadastro = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jTextBusca = new javax.swing.JTextField();
+        jButtonCadastro1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,7 +80,7 @@ public class Tela extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextRA, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextCPF)
                     .addComponent(jTextIdade, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
@@ -110,15 +115,57 @@ public class Tela extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Cadastro", jPanel1);
 
+        jTextBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextBuscaActionPerformed(evt);
+            }
+        });
+
+        jButtonCadastro1.setText("Buscar");
+        jButtonCadastro1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonCadastro1MouseClicked(evt);
+            }
+        });
+
+        jLabel2.setText("Resultado: ");
+
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Nome", "CPF", "RA" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 406, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jTextBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2))
+                    .addComponent(jButtonCadastro1))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 253, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(40, 40, 40)
+                        .addComponent(jButtonCadastro1)))
+                .addGap(72, 72, 72))
         );
 
         jTabbedPane1.addTab("Busca", jPanel2);
@@ -127,7 +174,7 @@ public class Tela extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 406, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,6 +228,41 @@ public class Tela extends javax.swing.JFrame {
         arquivo.finalizar();
     }//GEN-LAST:event_jButtonCadastroMouseClicked
 
+    private void jButtonCadastro1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCadastro1MouseClicked
+        // TODO add your handling code here:
+        String aux;
+        IODado arquivo = new IODado("src\\dados.txt");
+        Aluno aux1;
+        
+        switch(jList1.getSelectedIndex()){
+            case 1:
+                IOIndice indiceNome = new IOIndice("src\\IndiceSec.txt");
+                IOIndice indiceRA1 = new IOIndice("src\\indiceRA.txt");
+                
+                break;
+            case 2:
+                IOIndice indiceCPF = new IOIndice("src\\indiceCPF.txt");
+                aux = indiceCPF.busca(jTextBusca.getText());
+                aux1 = arquivo.ler(Long.parseLong(aux));
+                jLabel2.setText(aux1.getNome());
+                break;
+            case 3:
+                IOIndice indiceRA = new IOIndice("src\\indiceRA.txt");
+                
+                break;
+            default:
+                
+                break;
+        }
+            
+        
+        
+    }//GEN-LAST:event_jButtonCadastro1MouseClicked
+
+    private void jTextBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextBuscaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextBuscaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -218,11 +300,16 @@ public class Tela extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastro;
+    private javax.swing.JButton jButtonCadastro1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextBusca;
     private javax.swing.JTextField jTextCPF;
     private javax.swing.JTextField jTextIdade;
     private javax.swing.JTextField jTextNome;

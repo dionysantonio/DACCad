@@ -54,12 +54,11 @@ public class IODado {
         
     }
     
-    public Aluno ler( int pos){
+    public Aluno ler( long pos){
         
         Aluno aluno = new Aluno();
         String aux;
-        String[] dado;
-                
+        String[] dado;  
             aux = lerLinha(pos);
             dado = aux.split("|");
             
@@ -72,7 +71,7 @@ public class IODado {
         
     }
     
-    private String lerLinha(int pos){
+    private String lerLinha(long pos){
         String aux = new String();
         char n;
         
