@@ -23,7 +23,25 @@ public class IODado {
             System.out.println(e.getCause());
         }
     }
-    
+    public void atualiza(long posIni){
+        long i;
+        long posFim;
+        String aux;
+        
+        try{
+            //le a proxima linha
+            aux = lerLinha(posIni);
+            posFim = arquivo.getFilePointer();
+            i= posIni;
+            arquivo.seek(posIni);
+            while(i<=posFim){
+                arquivo.writeBytes(" ");
+                i++;
+            }
+        }catch(IOException e){
+            System.out.println(e.getCause());
+        }
+    }
     public long getTam(){
         try{
             return arquivo.length();

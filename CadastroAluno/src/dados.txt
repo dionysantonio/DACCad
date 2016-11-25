@@ -1,1 +1,1 @@
-RA|Nome|Idade|CPF#115482|Karolina|25|0000000#135682|Karolina|25|41842496808#119322|Dionys|23|41685510833#
+RA|Nome|Idade|CPF#115482|Karolina|25|0000000#135682|Karolina|25|41842496808#                              

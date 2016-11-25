@@ -50,6 +50,11 @@ public class Tela extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabelRemover = new javax.swing.JLabel();
+        jButtonRemover = new javax.swing.JButton();
+        jTextRemover = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -183,6 +188,53 @@ public class Tela extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Indice", jPanel3);
 
+        jLabel3.setText("Insira o RA do registro a ser deletado:");
+
+        jLabelRemover.setText("Aguardando.");
+        jLabelRemover.setToolTipText("");
+
+        jButtonRemover.setLabel("Remover");
+        jButtonRemover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonRemoverMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(174, 174, 174)
+                        .addComponent(jLabelRemover))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jTextRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addComponent(jButtonRemover))
+                            .addComponent(jLabel3))))
+                .addContainerGap(142, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonRemover)
+                    .addComponent(jTextRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabelRemover)
+                .addContainerGap(128, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Remover", jPanel4);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,12 +285,13 @@ public class Tela extends javax.swing.JFrame {
         String aux;
         IODado arquivo = new IODado("src\\dados.txt");
         Aluno aux1 = new Aluno();
-        long time1 = System.nanoTime();
+        long time1;
         long time2;
         long time3;
         
         switch(jList1.getSelectedIndex()){
             case 0:
+                time1 = System.nanoTime();
                 IOIndice indiceNome = new IOIndice("src\\IndiceSec.txt");
                 IOIndice indiceRA1 = new IOIndice("src\\indiceRA.txt");
                 
@@ -247,7 +300,7 @@ public class Tela extends javax.swing.JFrame {
                 jLabel2.setText(aux);
                 if(aux!=null){
                     aux1 = arquivo.ler(Long.parseLong(aux));
-                    time2 = System.currentTimeMillis();
+                    time2 = System.nanoTime();
                     jLabel2.setText("<html>"+
                             "RA: "+aux1.getRA()+"<br />"+
                             "Nome: "+aux1.getNome()+"<br />"+
@@ -261,13 +314,14 @@ public class Tela extends javax.swing.JFrame {
                 }
                 break;
             case 1:
+                time1 = System.nanoTime();
                 IOIndice indiceCPF = new IOIndice("src\\indiceCPF.txt");
                 
                 aux = indiceCPF.busca(jTextBusca.getText());
                 jLabel2.setText(aux);
                 if(aux!=null){
                     aux1 = arquivo.ler(Long.parseLong(aux));
-                    time2 = System.currentTimeMillis();
+                    time2 = System.nanoTime();
                     jLabel2.setText("<html>"+
                             "RA: "+aux1.getRA()+"<br />"+
                             "Nome: "+aux1.getNome()+"<br />"+
@@ -281,13 +335,14 @@ public class Tela extends javax.swing.JFrame {
                 }
                 break;
             case 2:
+                time1 = System.nanoTime();
                 IOIndice indiceRA = new IOIndice("src\\indiceRA.txt");
                 
                 aux = indiceRA.busca(jTextBusca.getText());
                 jLabel2.setText(aux);
                 if(aux!=null){
                     aux1 = arquivo.ler(Long.parseLong(aux));
-                    time2 = System.currentTimeMillis();
+                    time2 = System.nanoTime();
                     jLabel2.setText("<html>"+
                             "RA: "+aux1.getRA()+"<br />"+
                             "Nome: "+aux1.getNome()+"<br />"+
@@ -312,6 +367,26 @@ public class Tela extends javax.swing.JFrame {
     private void jTextBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextBuscaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextBuscaActionPerformed
+
+    private void jButtonRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRemoverMouseClicked
+        // TODO add your handling code here:
+        String aux_IniDado;
+        IODado arquivo = new IODado("src\\dados.txt");
+        Aluno aux1 = new Aluno();
+        
+        IOIndice indiceRA = new IOIndice("src\\indiceRA.txt");
+                
+                aux_IniDado = indiceRA.busca(jTextRemover.getText());
+                if(aux_IniDado!=null){
+                    aux1 = arquivo.ler(Long.parseLong(aux_IniDado));
+                    indiceRA.atualiza();
+                    arquivo.atualiza(Long.parseLong(aux_IniDado));
+                    jLabelRemover.setText("Removido!");
+                }else{
+                   
+                    jLabelRemover.setText("Dado não encontrado!");
+                }
+    }//GEN-LAST:event_jButtonRemoverMouseClicked
 
     /**
      * @param args the command line arguments
@@ -351,12 +426,16 @@ public class Tela extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastro;
     private javax.swing.JButton jButtonCadastro1;
+    private javax.swing.JButton jButtonRemover;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelRemover;
     private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextBusca;
@@ -364,5 +443,6 @@ public class Tela extends javax.swing.JFrame {
     private javax.swing.JTextField jTextIdade;
     private javax.swing.JTextField jTextNome;
     private javax.swing.JTextField jTextRA;
+    private javax.swing.JTextField jTextRemover;
     // End of variables declaration//GEN-END:variables
 }
