@@ -47,12 +47,16 @@ public class IOIndice {
     }
     
     public String busca(String parametro){
+        String[] dado;
         try{
+            
             while(arquivo.getFilePointer()<arquivo.length()){
                 String linha = arquivo.readLine();
-                String[] dado =linha.split("|");
-                if (dado[0].equals(parametro))
-                        return dado[1];
+                dado =linha.split("\\|");
+                
+                if (dado[0].equals(parametro)){
+                    return dado[1];
+                }
             }
             return null;
         }catch(IOException e){

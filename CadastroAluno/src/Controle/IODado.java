@@ -60,7 +60,7 @@ public class IODado {
         String aux;
         String[] dado;  
             aux = lerLinha(pos);
-            dado = aux.split("|");
+            dado = aux.split("\\|");
             
             aluno.setRA(dado[0]);
             aluno.setNome(dado[1]);
@@ -73,14 +73,16 @@ public class IODado {
     
     private String lerLinha(long pos){
         String aux = new String();
-        char n;
+        byte n;
         
         try{
             arquivo.seek(pos);
-            for(n = arquivo.readChar();n!='#';)
-                aux = aux + arquivo.readChar();
+            for(n = arquivo.readByte();n!='#';n = arquivo.readByte()){
+                aux = aux + (char) n;
+            }
+            
         }catch(IOException e){
-            System.out.println(e.getCause());
+            System.out.println(pos + " "+ aux);
         }
         return aux;
     }

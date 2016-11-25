@@ -11,6 +11,8 @@ import Dado.Aluno;
 import Controle.IODado;
 import Controle.IOIndice;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 /**
  *
  * @author d119322
@@ -86,13 +88,10 @@ public class Tela extends javax.swing.JFrame {
                     .addComponent(jTextIdade, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
                 .addGap(101, 101, 101))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(144, 144, 144)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(jButtonCadastro))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(jLabel1)))
+                    .addComponent(jButtonCadastro)
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -146,12 +145,11 @@ public class Tela extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2))
+                    .addComponent(jTextBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCadastro1))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,12 +157,14 @@ public class Tela extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(3, 3, 3)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jTextBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(40, 40, 40)
-                        .addComponent(jButtonCadastro1)))
+                            .addGap(40, 40, 40)
+                            .addComponent(jButtonCadastro1))))
                 .addGap(72, 72, 72))
         );
 
@@ -232,26 +232,76 @@ public class Tela extends javax.swing.JFrame {
         // TODO add your handling code here:
         String aux;
         IODado arquivo = new IODado("src\\dados.txt");
-        Aluno aux1;
+        Aluno aux1 = new Aluno();
+        long time1 = System.nanoTime();
+        long time2;
+        long time3;
         
         switch(jList1.getSelectedIndex()){
-            case 1:
+            case 0:
                 IOIndice indiceNome = new IOIndice("src\\IndiceSec.txt");
                 IOIndice indiceRA1 = new IOIndice("src\\indiceRA.txt");
                 
+                aux = indiceNome.busca(jTextBusca.getText());
+                aux= indiceRA1.busca(aux);
+                jLabel2.setText(aux);
+                if(aux!=null){
+                    aux1 = arquivo.ler(Long.parseLong(aux));
+                    time2 = System.currentTimeMillis();
+                    jLabel2.setText("<html>"+
+                            "RA: "+aux1.getRA()+"<br />"+
+                            "Nome: "+aux1.getNome()+"<br />"+
+                            "CPF: "+aux1.getCPF()+"<br />"+
+                            "Idade: "+aux1.getIdade() +                           
+                            "<br />Tempo de consulta: " + (time2 - time1)/1000+" milissegundos.</html>");
+                }else{
+                    time3 = System.nanoTime();
+                    
+                    jLabel2.setText("<html>Não encontrado!" + "<br />Tempo de consulta: " + (time3 - time1)/1000+" milissegundos.</html>");
+                }
+                break;
+            case 1:
+                IOIndice indiceCPF = new IOIndice("src\\indiceCPF.txt");
+                
+                aux = indiceCPF.busca(jTextBusca.getText());
+                jLabel2.setText(aux);
+                if(aux!=null){
+                    aux1 = arquivo.ler(Long.parseLong(aux));
+                    time2 = System.currentTimeMillis();
+                    jLabel2.setText("<html>"+
+                            "RA: "+aux1.getRA()+"<br />"+
+                            "Nome: "+aux1.getNome()+"<br />"+
+                            "CPF: "+aux1.getCPF()+"<br />"+
+                            "Idade: "+aux1.getIdade() +                           
+                            "<br />Tempo de consulta: " + (time2 - time1)/1000+" milissegundos.</html>");
+                }else{
+                    time3 = System.nanoTime();
+                    
+                    jLabel2.setText("<html>Não encontrado!<br />Tempo de consulta: " + (time3 - time1)/1000+" milissegundos.</html>");
+                }
                 break;
             case 2:
-                IOIndice indiceCPF = new IOIndice("src\\indiceCPF.txt");
-                aux = indiceCPF.busca(jTextBusca.getText());
-                aux1 = arquivo.ler(Long.parseLong(aux));
-                jLabel2.setText(aux1.getNome());
-                break;
-            case 3:
                 IOIndice indiceRA = new IOIndice("src\\indiceRA.txt");
                 
+                aux = indiceRA.busca(jTextBusca.getText());
+                jLabel2.setText(aux);
+                if(aux!=null){
+                    aux1 = arquivo.ler(Long.parseLong(aux));
+                    time2 = System.currentTimeMillis();
+                    jLabel2.setText("<html>"+
+                            "RA: "+aux1.getRA()+"<br />"+
+                            "Nome: "+aux1.getNome()+"<br />"+
+                            "CPF: "+aux1.getCPF()+"<br />"+
+                            "Idade: "+aux1.getIdade() +                           
+                            "<br />Tempo de consulta: " + (time2 - time1)/1000+" milissegundos.</html>");
+                }else{
+                    time3 = System.nanoTime();
+                    
+                    jLabel2.setText("<html>Não encontrado!<br />Tempo de consulta: " + (time3 - time1)/1000+" milissegundos.</html>");
+                }
                 break;
             default:
-                
+                jLabel2.setText("Selectione uma opção e clique no botão buscar.");
                 break;
         }
             
