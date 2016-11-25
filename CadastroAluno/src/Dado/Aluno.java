@@ -10,20 +10,20 @@ package Dado;
  * @author d119322
  */
 public class Aluno {
-    private int RA;
+    private String RA;
     private String nome;
-    private int idade;
-    private int CPF;
+    private String idade;
+    private String CPF;
     
     public String getNome(){
         return nome;
     }
     
-    public int getRA(){
+    public String getRA(){
         return RA;
     }
     
-    public void setRA(int numero){
+    public void setRA(String numero){
         RA = numero;
     }
     
@@ -31,19 +31,19 @@ public class Aluno {
         nome = name;
     }
     
-    public void setCPF(int numero){
+    public void setCPF(String numero){
         CPF = numero;
     }
     
-    public void setIdade(int numero){
+    public void setIdade(String numero){
         idade = numero;
     }
     
-    public int getIdade(){
+    public String getIdade(){
         return idade;
     }
     
-    public int getCPF(){
+    public String getCPF(){
         return CPF;
     }
     

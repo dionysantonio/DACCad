@@ -12,12 +12,15 @@ import Dado.Aluno;
  *
  * @author d119322
  */
-public class IODado {
+public class IOIndice {
+   private String endereco;
+   private String dado;
+   
     private RandomAccessFile arquivo;
     
-    public IODado(String caminho){
+    public IOIndice(String caminho){
         try{
-        RandomAccessFile file = new RandomAccessFile(caminho, "rw");
+        RandomAccessFile file = new RandomAccessFile(caminho, "rwd");
         arquivo = file;
         }catch(IOException e){
             System.out.println(e.getCause());
@@ -33,18 +36,31 @@ public class IODado {
         }
     }
     
-   // public void escrever(String s, int pos){
-    public void escrever(String s){
+    public void escreverIndP(String s){
         try{
             if(arquivo.length()>0)
                 arquivo.seek(arquivo.length());
-            arquivo.writeBytes(s);
+            arquivo.writeBytes(s+"\r\n");
         }catch(IOException e){
             System.out.println(e.getCause());
         }
     }
     
-
+    public String busca(String parametro){
+        try{
+            while(arquivo.getFilePointer()<arquivo.length()){
+                String linha = arquivo.readLine();
+                String[] dado =linha.split("|");
+                if (dado[0].equals(parametro))
+                        return dado[1];
+            }
+            return null;
+        }catch(IOException e){
+            System.out.println(e.getCause());
+        }
+        return null;
+    }
+    
     public void finalizar(){
         try{
           arquivo.close();
@@ -53,38 +69,5 @@ public class IODado {
         }
         
     }
-    
-    public Aluno ler( int pos){
-        
-        Aluno aluno = new Aluno();
-        String aux;
-        String[] dado;
-                
-            aux = lerLinha(pos);
-            dado = aux.split("|");
-            
-            aluno.setRA(dado[0]);
-            aluno.setNome(dado[1]);
-            aluno.setIdade(dado[2]);
-            aluno.setCPF(dado[3]);
-            
-        return aluno;
-        
-    }
-    
-    private String lerLinha(int pos){
-        String aux = new String();
-        char n;
-        
-        try{
-            arquivo.seek(pos);
-            for(n = arquivo.readChar();n!='#';)
-                aux = aux + arquivo.readChar();
-        }catch(IOException e){
-            System.out.println(e.getCause());
-        }
-        return aux;
-    }
-    
-    
+   
 }
