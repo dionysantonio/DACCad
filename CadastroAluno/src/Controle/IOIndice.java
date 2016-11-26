@@ -13,8 +13,7 @@ import Dado.Aluno;
  * @author d119322
  */
 public class IOIndice {
-   private String endereco;
-   private String dado;
+
    
     private RandomAccessFile arquivo;
     
