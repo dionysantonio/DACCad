@@ -51,6 +51,15 @@ public class IODado {
         }
     }
     
+    public long getPos(){
+        try{
+            return arquivo.getFilePointer();
+        }catch(IOException e){
+            System.out.println(e.getCause());
+            return 0;
+        }
+    }
+    
    // public void escrever(String s, int pos){
     public void escrever(String s){
         try{

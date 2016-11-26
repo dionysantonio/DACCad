@@ -104,5 +104,33 @@ public class IOIndice {
         }
         
     }
-   
+    public void setPos(long pos){
+        
+        try{
+            arquivo.seek(pos);
+        }catch(IOException e){
+            System.out.println(e.getCause());
+        }
+    }
+    public long getPos(){
+        try{
+            return arquivo.getFilePointer();
+        }catch(IOException e){
+            System.out.println(e.getCause());
+            return 0;
+        }
+    }
+    
+    public String[] lerLinha(long pos){
+        String[] dado;
+        try{
+            arquivo.seek(pos);
+            String linha = arquivo.readLine();
+            dado =linha.split("\\|");
+            return dado;
+        }catch(IOException e){
+            System.out.println(e.getCause());
+            return null;
+        }
+    }
 }
