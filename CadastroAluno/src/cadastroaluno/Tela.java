@@ -49,7 +49,7 @@ public class Tela extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jTextBusca = new javax.swing.JTextField();
-        jButtonCadastro1 = new javax.swing.JButton();
+        jButtonBusca = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
@@ -160,10 +160,10 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
-        jButtonCadastro1.setText("Buscar");
-        jButtonCadastro1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonBusca.setText("Buscar");
+        jButtonBusca.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonCadastro1MouseClicked(evt);
+                jButtonBuscaMouseClicked(evt);
             }
         });
 
@@ -186,7 +186,7 @@ public class Tela extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCadastro1))
+                    .addComponent(jButtonBusca))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(34, Short.MAX_VALUE))
@@ -204,7 +204,7 @@ public class Tela extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jTextBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(40, 40, 40)
-                            .addComponent(jButtonCadastro1))))
+                            .addComponent(jButtonBusca))))
                 .addGap(72, 72, 72))
         );
 
@@ -421,7 +421,7 @@ public class Tela extends javax.swing.JFrame {
         arquivo.finalizar();
     }//GEN-LAST:event_jButtonCadastroMouseClicked
 
-    private void jButtonCadastro1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCadastro1MouseClicked
+    private void jButtonBuscaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBuscaMouseClicked
         // TODO add your handling code here:
         String aux;
         IODado arquivo = new IODado("src\\dados.txt");
@@ -503,7 +503,7 @@ public class Tela extends javax.swing.JFrame {
             
         
         
-    }//GEN-LAST:event_jButtonCadastro1MouseClicked
+    }//GEN-LAST:event_jButtonBuscaMouseClicked
 
     private void jTextBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextBuscaActionPerformed
         // TODO add your handling code here:
@@ -630,8 +630,8 @@ public class Tela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonBusca;
     private javax.swing.JButton jButtonCadastro;
-    private javax.swing.JButton jButtonCadastro1;
     private javax.swing.JButton jButtonIndice;
     private javax.swing.JButton jButtonRemover;
     private javax.swing.JLabel jLabel1;
