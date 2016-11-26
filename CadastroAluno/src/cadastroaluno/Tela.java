@@ -374,18 +374,26 @@ public class Tela extends javax.swing.JFrame {
         IODado arquivo = new IODado("src\\dados.txt");
         Aluno aux1 = new Aluno();
         
+        
         IOIndice indiceRA = new IOIndice("src\\indiceRA.txt");
+        IOIndice indiceNome = new IOIndice("src\\IndiceSec.txt");  
+        IOIndice indiceCPF = new IOIndice("src\\indiceCPF.txt");
+        
+        aux_IniDado = indiceRA.busca(jTextRemover.getText());
                 
-                aux_IniDado = indiceRA.busca(jTextRemover.getText());
                 if(aux_IniDado!=null){
                     aux1 = arquivo.ler(Long.parseLong(aux_IniDado));
-                    indiceRA.atualiza();
+                    indiceRA.atualiza(aux1.getRA());
+                    indiceCPF.atualiza(aux1.getCPF());
+                    indiceNome.atualiza(aux1.getNome());
                     arquivo.atualiza(Long.parseLong(aux_IniDado));
                     jLabelRemover.setText("Removido!");
+                    arquivo.finalizar();
                 }else{
                    
                     jLabelRemover.setText("Dado não encontrado!");
                 }
+                
     }//GEN-LAST:event_jButtonRemoverMouseClicked
 
     /**

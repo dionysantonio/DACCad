@@ -46,25 +46,35 @@ public class IOIndice {
         }
     }
     
-    public void atualiza(){
+    public void atualiza(String parametro){
         long i;
         long posFim;
         long posIni;
-        String aux;
+        String[] dado;
         
+         
         try{
-            posIni = arquivo.getFilePointer();
-            aux = arquivo.readLine();
-            posFim = arquivo.getFilePointer();
-            i= posIni;
-            arquivo.seek(posIni);
-            while(i<=posFim){
-                arquivo.writeBytes(" ");
-                i++;
+            arquivo.seek(0); 
+            while(arquivo.getFilePointer()<arquivo.length()){
+                String linha = arquivo.readLine();
+                dado =linha.split("\\|");
+                
+                if (dado[0].equals(parametro)){
+                    posFim = arquivo.getFilePointer();
+                    posIni = (arquivo.getFilePointer()-(linha.length()))-2;
+                    i= posIni;
+                    arquivo.seek(posIni);
+                    while(i<posFim-2){
+                        arquivo.writeBytes(" ");
+                        i++;
+                    }
+                }
             }
+            
         }catch(IOException e){
             System.out.println(e.getCause());
         }
+                
     }
     
     public String busca(String parametro){

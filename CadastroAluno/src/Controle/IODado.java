@@ -34,7 +34,7 @@ public class IODado {
             posFim = arquivo.getFilePointer();
             i= posIni;
             arquivo.seek(posIni);
-            while(i<=posFim){
+            while(i<posFim-1){
                 arquivo.writeBytes(" ");
                 i++;
             }
