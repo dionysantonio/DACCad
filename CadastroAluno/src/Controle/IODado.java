@@ -95,13 +95,11 @@ public class IODado {
             aluno.setCPF(dado[3]);
             
         return aluno;
-        
     }
     
     private String lerLinha(long pos){
         String aux = new String();
         byte n;
-        
         try{
             arquivo.seek(pos);
             for(n = arquivo.readByte();n!='#';n = arquivo.readByte()){

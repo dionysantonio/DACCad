@@ -554,9 +554,14 @@ public class Tela extends javax.swing.JFrame {
                 //jTable1.add({aux[0],aux[1]});
                 while(indiceNome.getPos()<indiceNome.getTam()){
                     aux = indiceNome.lerLinha(indiceNome.getPos());
+                    if((aux[0].contains("     "))){
+                    }                   
+                    else{
                     jTable1.setValueAt(aux[0], i, 0);
                     jTable1.setValueAt(aux[1], i, 1);
                     i++;
+                    }
+                    
                 }
                 break;
                 
@@ -567,9 +572,13 @@ public class Tela extends javax.swing.JFrame {
                 //jTable1.add({aux[0],aux[1]});
                 while(indiceCPF.getPos()<indiceCPF.getTam()){
                     aux = indiceCPF.lerLinha(indiceCPF.getPos());
+                    if((aux[0].contains("     "))){
+                    }                   
+                    else{
                     jTable1.setValueAt(aux[0], i, 0);
                     jTable1.setValueAt(aux[1], i, 1);
                     i++;
+                    }
                 }
                 break;
                 
@@ -580,9 +589,13 @@ public class Tela extends javax.swing.JFrame {
                 //jTable1.add({aux[0],aux[1]});
                 while(indiceRA.getPos()<indiceRA.getTam()){
                     aux = indiceRA.lerLinha(indiceRA.getPos());
+                    if((aux[0].contains("     "))){
+                    }                   
+                    else{
                     jTable1.setValueAt(aux[0], i, 0);
                     jTable1.setValueAt(aux[1], i, 1);
                     i++;
+                    }
                 }
                 break;
                 
